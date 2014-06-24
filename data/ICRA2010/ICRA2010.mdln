@@ -1,0 +1,9 @@
+# ICRA 2010 Test script 1
+
+a1 1;
+a2 1;
+a3 0;
+
+(a1, GoToGoal, AtGoal, {a3})(a1, Wait, Always, {a3});
+(a2, GoToGoal, AtGoal, {})(a2, Wait, Always, {a3});
+(a3, Follow, BuddyAtGoal, {a1})(a3, Follow, Obstacle, {a2});

@@ -1,0 +1,11 @@
+# ICRA 2010 Test script 2
+
+a1 2;
+a2 1;
+a3 1;
+a4 0;
+
+(a1, GoToGoal, ThreatDetected, {a2 a3})(a1, ApproachThreat, AtThreat, {})(a1, ScanThreat, Always or 10, {})(a1, GoToGoal, AtGoal, {a2 a3});
+(a2, RandomWalk, Obstacle or 10, {})(a2, Follow, Obstacle, {a1})(a2, Avoid, Clear, {});
+(a3, RandomWalk, Obstacle or 10, {a4})(a3, Follow, Obstacle, {a1})(a3, Avoid, Clear, {});
+(a4, Follow, Obstacle, {a3})(a4, Avoid, Clear, {})(a4, GoToGoal, AtGoal, {});

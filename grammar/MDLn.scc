@@ -1,0 +1,93 @@
+Package edu.gatech.grits.mdln;
+
+Helpers
+  all           = [0 .. 127];
+  digit         = ['0'..'9'];
+  nonzero_digit = ['1'..'9'];
+  nondigit      = [ '_' + [ [ 'a' .. 'z' ] + [ 'A' .. 'Z' ] ] ];
+  lowercase     = ['a' .. 'z'];
+
+  ht     = 0x0009;
+  lf     = 0x000a;
+  ff     = 0x000c;
+  cr     = 0x000d;
+  line_terminator = cr | lf | cr lf;
+  input_char = [all - [cr + lf]];
+  sp     = ' ';
+
+  pound = '#';
+  minus = '-';
+  tilde = '~';
+
+  digit_sequence = minus? digit+;
+
+  unit_suffix = lowercase+;
+
+  fractional_constant = digit_sequence? '.' digit_sequence |
+                        digit_sequence;
+
+  decimal_constant = minus? nonzero_digit digit*;
+
+  infinite_constant = digit?tilde;
+  
+  /* Java like classpath helper */
+  classpath = (nondigit nondigit* '.')+;
+
+Tokens
+  white_space = (sp | ht | ff | line_terminator)*;
+  comment = '#' input_char* line_terminator?;
+
+  not = 'not';
+  and = 'and';
+  or = 'or';
+  xor = 'xor';
+  identifier = classpath nondigit ( digit | nondigit )* |
+               nondigit ( digit | nondigit )*;
+
+  number = fractional_constant unit_suffix? |
+           decimal_constant unit_suffix? |
+           infinite_constant;
+
+  l_par = '(';
+  r_par = ')';
+  l_brac = '[';
+  r_brac = ']';
+  l_curly = '{';
+  r_curly = '}';
+  equals = '=';
+  comma   = ',';
+  colon = ':';
+  semicolon = ';';
+  star = '*';
+  dot = '.';
+  /* used for looping mode strings */
+  ellipsis = '...';
+
+Ignored Tokens
+  white_space,
+  comment;
+
+Productions
+  
+  mdln = P.role* P.modelist+;
+  
+  role = {static} [agent_name]:identifier number semicolon | 
+  		{dynamic} [agent_name]:identifier [role_map]:identifier semicolon;
+  
+/*  modelist = [agent_name]:identifier colon P.mode+ semicolon; */
+
+  modelist = P.mode+ ellipsis? semicolon;
+  
+/*  mode = 	{standard} [p1]:l_par [control_name]:identifier [c1]:comma [interrupt_name]:identifier P.timer? [p2]:r_par | */
+/*  			{net} [p1]:l_par [control_name]:identifier [c1]:comma [interrupt_name]:identifier P.timer? [c2]:comma P.buddylist [p2]:r_par; */
+  
+/*  mode = [p1]:l_par P.control [c1]:comma P.interrupt P.timer? [p2]:r_par;*/ 
+
+  mode = [p1]:l_par [agent_name]:identifier [c1]:comma P.control [c2]:comma P.interrupt P.timer? P.buddylist? [p2]:r_par;
+
+  /* support productions */
+  control = [control_name]:identifier; /*buddylist?;*/
+  interrupt = [interrupt_name]:identifier; /*buddylist?;*/
+  timer = or number;
+  buddylist = comma l_curly [buddy]:identifier* r_curly;
+  

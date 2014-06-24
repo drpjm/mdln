@@ -1,0 +1,7 @@
+edu.grits.agents = GuiAgent,0;Agent1,1;Agent2,2;Agent3,3;Agent4,4;SuperAgent,99;
+edu.grits.sensors = 
+edu.grits.backend = 
+edu.grits.address = 127.0.0.1
+edu.grits.id = 99
+edu.grits.devport = 
+edu.grits.netport = 6559

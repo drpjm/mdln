@@ -1,0 +1,25 @@
+#test file for MDLn compiler
+
+# A nice complex test program
+
+Agent1 1;
+Agent2 1;
+Agent3 0;
+#Agent4 0;
+
+#(Agent1, Follow, Obstacle or 10, {Agent3})(Agent1, Follow, Obstacle or 10, {Agent2})
+#(Agent1, Follow, Obstacle or 6, {Agent3});
+#(Agent2, Follow, Obstacle or 10, {Agent3})(Agent2, Follow, Obstacle or 10, {Agent1});
+#(Agent3, Follow, Obstacle or 20, {Agent1});
+#(Agent3, Follow, Obstacle or 5, {Agent2});
+
+# IROS2009 program
+(Agent1, Follow, Obstacle, {Agent2})(Agent1, Avoid, Clear, {})(Agent1, Follow, Obstacle, {Agent3});
+(Agent2, GoToGoal, Obstacle, {})(Agent2, Avoid, Clear, {});
+(Agent3, Follow, Obstacle, {Agent1});
+
+#(Agent4, GoToGoal, Obstacle, {});
+
+#(Agent1, Forward, Obstacle or 10, {Agent3 Agent2});
+#(Agent2, Clockwise, Obstacle, {Agent3});
+#(Agent3, CounterClockwise, Obstacle, {Agent1 Agent2});
