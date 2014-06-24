@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:pancakes="edu.gatech.grits.pancakes"
+    targetNamespace="edu.gatech.grits.pancakes">
+    <xs:complexType name="BackendOptions">
+        <xs:sequence>
+            <xs:element name="Type" type="xs:string"/>
+            <xs:element name="Port" minOccurs="0" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="DeviceOptions">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="Device" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="NetworkOptions">
+        <xs:sequence>
+            <xs:element name="Address" type="xs:string"/>
+            <xs:element name="Port" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="KernelOptions">
+        <xs:sequence>
+            <xs:element name="ID" type="xs:int"/>
+            <xs:element name="Frequency" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="Agent">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Kernel" type="pancakes:KernelOptions"/>
+                <xs:element name="Devices" type="pancakes:DeviceOptions"/>
+                <xs:element name="Network" type="pancakes:NetworkOptions"/>
+                <xs:element name="Backend" type="pancakes:BackendOptions"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

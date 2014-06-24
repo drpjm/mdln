@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pancakes:Agent xmlns:pancakes="edu.gatech.grits.pancakes"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="edu.gatech.grits.pancakes file:/home/jean-pierre/Workspace/OxygenXMLEditor/pancakes/properties.xsd">
+    <Kernel>
+        <ID>8</ID>
+        <Frequency>10</Frequency>
+    </Kernel>
+    <Devices>
+    	<!-- player specific order -->
+    	<Device>motors</Device>
+        <Device>sonar</Device>
+    	<Device>local</Device>
+    </Devices>
+    <Network>
+        <Address>127.0.0.1</Address>
+        <Port>2413</Port>
+    </Network>
+    <Backend>
+        <Type>player</Type>
+        <Port>6665</Port>
+    </Backend>
+</pancakes:Agent>
